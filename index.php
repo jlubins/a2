@@ -22,7 +22,7 @@
 <body>
   <h1>XKCD Password Generator</h1>
 
-  <form method='post' action='/#'>
+  <form method='post' action=''>
     <input type='hidden' name='alwaysPost' value='0'>
 
     <label for='text'>Select which base text you would like to use to generate your password.</label>
