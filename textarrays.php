@@ -3,50 +3,43 @@
 require('tools.php');
 
 // dropdown logic for choosing text to base password words from:
-$lines = array();
 if(isset($_POST['text'])) {
 	$text = $_POST['text'];
-    if($text = 'choose') {
-        $alertType = 'alert-danger';
-        $results = 'Please choose a text.';
-    } if($text = 'alice') {
-        $lines = array_map(function($v){
-          return explode(" ", $v);
-        }, file("alice.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
+    if($text == 'alice') {
+        $alice = file_get_contents("alice.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES);
+        $line = trim(preg_replace('/[^0-9a-z]+/i', ' ', $alice));
+        $lines = explode(" ", $line);
         $alertType = 'alert-info';
         $results = 'You chose '.$text;
-    } if($text = 'constitution') {
-        $lines = array_map(function($v){
-            return explode(" ", $v);
-        }, file("constitution.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
+    } elseif($text == 'constitution') {
+        $constitution = file_get_contents("constitution.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES);
+        $line = trim(preg_replace('/[^0-9a-z]+/i', ' ', $constitution));
+        $lines = explode(" ", $line);
         $alertType = 'alert-info';
         $results = 'You chose '.$text;
-    } if($text = 'iliad') {
-        $lines = array_map(function($v){
-            return explode(" ", $v);
-        }, file("iliad.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
-
+    } elseif ($text == 'iliad') {
+        $iliad = file_get_contents("iliad.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES);
+        $line = trim(preg_replace('/[^0-9a-z]+/i', ' ', $iliad));
+        $lines = explode(" ", $line);
         $alertType = 'alert-info';
         $results = 'You chose '.$text;
+    } else {
+      $alertType = 'alert-danger';
+      $results = 'Please choose a text.';
     }
 }
 
 // pulls value for number of words to generate from html slider
 $wordnumber = $_POST['wordnumber'];
 
-// creates array of values from chosen text + wordnumber slider
-$generatedvalues = array_rand ($lines, $wordnumber);
+// randomizes array
+shuffle($lines);
+
+// takes slice of array at the number of words specified by the user
+$generatedvalues = array_slice($lines, 0, $wordnumber);
 
 // if isuppercase box checked, gives value of true or false (1 or 0)
-if(isset($_POST['uppercase_checkbox']) && $_POST['uppercase_checkbox'] = "isuppercase") {
-  $isuppercase = 1;
-}
-else {
-  $isuppercase = 0;
-}
-
-// if uppercase checkbox is TRUE, uppercase the first letter of each generated word
-if($isuppercase = 1){
+if(isset($_POST['uppercase_checkbox'])) {
   foreach($generatedvalues as $keyval => $value){
     $generatedvalues[$keyval] = ucwords($generatedvalues[$keyval]);
   }
@@ -61,4 +54,8 @@ if(isset($_POST['incl_number_checkbox']) && $_POST['incl_number_checkbox'] = "in
 // join the generated values (and potentially number) with dashes as password output
 $password = join('-', $generatedvalues);
 
-dump($lines);
+dump($password);
+
+//$lines = array_map(function($v){
+//    return explode(" ", $v);
+//}, file_get_contents("constitution.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));

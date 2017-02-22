@@ -28,9 +28,9 @@
     <label for='text'>Select which base text you would like to use to generate your password.</label>
       <select name='text' id='text'>
         <option value='choose'>Choose one...</option>
+        <option value='iliad'>Homer's Iliad</option>
         <option value='alice'>Alice in Wonderland</option>
         <option value='constitution'>United States Constitution</option>
-        <option value='iliad'>Homer's Iliad</option>
       </select>
 
     <input name="wordnumber" type="range" min="3" max="6" step="1" />
@@ -44,7 +44,7 @@
 
     <?php if($_POST): ?>
 			<div class="alert <?=$alertType?>" role="alert">
-				<?=$results?>
+				<?=$password?>
 			</div>
 		<?php endif; ?>
   </form>
