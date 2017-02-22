@@ -1,3 +1,4 @@
+<?php require('textarrays.php'); ?>
 <!doctype html>
 
 <html lang="en">
@@ -19,19 +20,18 @@
 </head>
 
 <body>
-  <?php require('tools.php') ?>
   <h1>XKCD Password Generator</h1>
 
-  <form method='POST' action='/'>
+  <form method='post' action='/#'>
     <input type='hidden' name='alwaysPost' value='0'>
 
     <label for='text'>Select which base text you would like to use to generate your password.</label>
-    <select name='text' id='text'>
-      <option value='choose'>Choose one...</option>
-      <option value='alice' <?php if($text == 'alice') echo 'SELECTED'?>>Alice in Wonderland</option>
-      <option value='constitution' <?php if($text == 'constitution') echo 'SELECTED'?>>United States Constitution</option>
-      <option value='iliad' <?php if($text == 'iliad') echo 'SELECTED'?>>Homer's Iliad</option>
-    </select>
+      <select name='text' id='text'>
+        <option value='choose'>Choose one...</option>
+        <option value='alice'>Alice in Wonderland</option>
+        <option value='constitution'>United States Constitution</option>
+        <option value='iliad'>Homer's Iliad</option>
+      </select>
 
     <input name="wordnumber" type="range" min="3" max="6" step="1" />
 
@@ -44,12 +44,12 @@
 
     <?php if($_POST): ?>
 			<div class="alert <?=$alertType?>" role="alert">
-				<?=$password?>
+				<?=$results?>
 			</div>
 		<?php endif; ?>
   </form>
 
-  <? dump($generatednumbers, $password, $isuppercase, $generatedvalues) ?>
+  <!-- <?php dump($generatednumbers, $password, $isuppercase, $generatedvalues) ?> -->
 
 </body>
 </html>
