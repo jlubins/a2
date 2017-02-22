@@ -9,19 +9,19 @@ if(isset($_POST['text'])) {
     if($text = 'choose') {
         $alertType = 'alert-danger';
         $results = 'Please choose a text.';
-    } elseif($text = 'alice') {
+    } if($text = 'alice') {
         $lines = array_map(function($v){
           return explode(" ", $v);
         }, file("alice.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
         $alertType = 'alert-info';
         $results = 'You chose '.$text;
-    } elseif($text = 'constitution') {
+    } if($text = 'constitution') {
         $lines = array_map(function($v){
             return explode(" ", $v);
         }, file("constitution.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
         $alertType = 'alert-info';
         $results = 'You chose '.$text;
-    } elseif($text = 'iliad') {
+    } if($text = 'iliad') {
         $lines = array_map(function($v){
             return explode(" ", $v);
         }, file("iliad.txt", FILE_IGNORE_NEW_LINES |FILE_SKIP_EMPTY_LINES));
