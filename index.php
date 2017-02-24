@@ -16,9 +16,9 @@
 			<div id="passwordgenerator">
 						<h1>XKCD Password Generator</h1>
             <br>
-            <div class="row">
-            <div class="col-sm-4">
-						<form method='post' action=''>
+						<form method='post' action='/'>
+							<div class="row">
+	            <div class="col-sm-4">
 							<input type='hidden' name='alwaysPost' value='0'>
 							<label for='text'>Select which base text you would like to use to generate your password.</label>
               <div class="dropdown dropdown-dark">
@@ -33,7 +33,7 @@
             <div class="col-sm-4">
               <label for='wordnumber'>Select the number of words you would like to be generated.</label>
               <div class="dropdown dropdown-dark">
-								<select name="wordnumber" class="dropdown-select"/>
+								<select name="wordnumber" class="dropdown-select">
 									<option value='3'>3</option>
 									<option value='4'>4</option>
 									<option value='5'>5</option>
@@ -53,16 +53,15 @@
               <input type='submit' class='btn btn-primary btn-small'>
             </div>
               </div>
-              <h2>
 							<?php if ($_POST): ?>
 							<div class="alert <?=$alertType?>" role="alert">
+								<h2>
 								<?=$password?>
+								</h2>
 							</div>
 							<?php endif; ?>
-            </h2>
 						</form>
 				</div>
 			</div>
-		</div>
 	</body>
 </html>

@@ -12,12 +12,12 @@ $textwordarray = new TextWordArray($text);
 $text = $form->get('text');
 $wordnumber = $_POST['wordnumber'];
 $uppercase = $form->isChosen('uppercase_checkbox');
-$incl_number = $form->isChosen('incl_number_checkbox');
+$inclnumber = $form->isChosen('incl_number_checkbox');
 
 if ($text != 'choose') {
-    $text_array = $textwordarray->MakeArray($text);
-    shuffle($text_array);
-    $generatedvalues = array_slice($text_array, 0, $wordnumber);
+    $textarray = $textwordarray->MakeArray($text);
+    shuffle($textarray);
+    $generatedvalues = array_slice($textarray, 0, $wordnumber);
     if ($uppercase) {
         foreach ($generatedvalues as $keyval => $value) {
             $generatedvalues[$keyval] = ucwords($generatedvalues[$keyval]);
@@ -27,7 +27,7 @@ if ($text != 'choose') {
             $generatedvalues[$keyval] = strtolower($generatedvalues[$keyval]);
         }
     }
-    if ($incl_number) {
+    if ($inclnumber) {
         $generatednumber = mt_rand(0, 99);
         array_push($generatedvalues, $generatednumber);
     }
